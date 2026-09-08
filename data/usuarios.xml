@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<usuarios>
+    <usuario>
+        <id>admin</id>
+        <clave>admin</clave>
+        <rol>ADMINISTRADOR</rol>
+    </usuario>
+
+    <usuario>
+        <id>123</id>
+        <clave>123</clave>
+        <rol>FUNCIONARIO</rol>
+    </usuario>
+</usuarios>

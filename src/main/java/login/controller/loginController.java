@@ -1,39 +1,41 @@
 package login.controller;
 
 import login.model.loginModel;
+import login.service.LoginService;
 import login.view.loginView;
+import model.Usuario;
 
 import javax.swing.*;
 
 public class loginController {
 
-    // El Controller conoce el Model.
     private loginModel model;
-
-    // El Controller conoce la View.
     private loginView view;
 
-    public loginController(loginModel model, loginView view) {
+    // Objeto que contiene la lógica del login.
+    private LoginService service;
 
-        // Guardamos los objetos que recibimos.
+    public loginController(
+            loginModel model,
+            loginView view,
+            LoginService service) {
+
+        // Guardamos los objetos recibidos.
         this.model = model;
         this.view = view;
+        this.service = service;
 
-        // El Controller conecta el evento del botón.
+        // El Controller escucha el botón.
         view.getBtnIngresar().addActionListener(e -> iniciarSesion());
     }
 
     private void iniciarSesion() {
 
-        // Leemos los datos desde la View.
+        // Leemos los datos escritos en la View.
         String id = view.getId();
         String contrasena = view.getContrasena();
 
-        // Guardamos los datos dentro del Model.
-        model.setId(id);
-        model.setContrasena(contrasena);
-
-        // Validación mínima de interfaz.
+        // Validamos que no estén vacíos.
         if (id.isBlank() || contrasena.isBlank()) {
 
             JOptionPane.showMessageDialog(
@@ -44,19 +46,28 @@ public class loginController {
             return;
         }
 
-        /*
-         * AQUÍ irá después:
-         *
-         * LoginService
-         *      ↓
-         * buscar usuario
-         *      ↓
-         * XML mediante JAXB
-         */
+        // Pedimos al Service que autentique al usuario.
+        Usuario usuario =
+                service.iniciarSesion(id, contrasena);
 
-        JOptionPane.showMessageDialog(
-                view,
-                "Datos recibidos correctamente"
-        );
+        if (usuario != null) {
+
+            // Guardamos el usuario autenticado en el Model.
+            model.setUsuarioAutenticado(usuario);
+
+            JOptionPane.showMessageDialog(
+                    view,
+                    "Ingreso correcto"
+            );
+
+            view.dispose();
+
+        } else {
+
+            JOptionPane.showMessageDialog(
+                    view,
+                    "ID o contraseña incorrectos"
+            );
+        }
     }
 }
