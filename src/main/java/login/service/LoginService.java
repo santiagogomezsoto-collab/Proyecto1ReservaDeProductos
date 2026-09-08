@@ -37,4 +37,38 @@ public class LoginService {
         // No encontramos coincidencia.
         return null;
     }
+
+
+    public boolean cambiarClave(
+            Usuario usuario,
+            String claveActual,
+            String nuevaClave) {
+
+        // Verificamos que la clave actual sea correcta.
+        if (!usuario.getClave().equals(claveActual)) {
+            return false;
+        }
+
+        // Cargamos todos los usuarios desde XML.
+        Usuarios datos = repository.cargarUsuarios();
+
+        if (datos == null) {
+            return false;
+        }
+
+        // Buscamos el mismo usuario dentro de la lista.
+        for (Usuario u : datos.getUsuarios()) {
+
+            if (u.getId().equals(usuario.getId())) {
+
+                // Modificamos la clave.
+                u.setClave(nuevaClave);
+
+                // Guardamos nuevamente toda la lista en XML.
+                return repository.guardarUsuarios(datos);
+            }
+        }
+
+        return false;
+    }
 }

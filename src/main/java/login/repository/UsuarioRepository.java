@@ -37,4 +37,38 @@ public class UsuarioRepository {
             return null;
         }
     }
+
+    public boolean guardarUsuarios(Usuarios usuarios) {
+
+        try {
+
+            // le decimos a JSXB que trabajara con clase Usuario
+            JAXBContext context =
+                    JAXBContext.newInstance(Usuarios.class);
+
+            // Marshaller convierte objetos Java -> XML.
+            var marshaller =
+                    context.createMarshaller();
+
+            // Hace el XML más legible
+            marshaller.setProperty(
+                    jakarta.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT,
+                    true
+            );
+
+            File archivo = new File(RUTA);
+
+            // Guardamos el objeto Usuarios dentro del archivo XML.
+            marshaller.marshal(usuarios, archivo);
+
+            return true;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }

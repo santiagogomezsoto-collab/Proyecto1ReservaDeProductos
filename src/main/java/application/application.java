@@ -1,10 +1,15 @@
 package application;
 
+import cambiarClave.controller.cambiarClaveController;
+import cambiarClave.model.cambiarClaveModel;
+import cambiarClave.view.cambiarClaveView;
 import login.controller.loginController;
 import login.model.loginModel;
 import login.repository.UsuarioRepository;
 import login.service.LoginService;
 import login.view.loginView;
+import model.Usuario;
+
 
 public class application {
 
@@ -30,5 +35,33 @@ public class application {
 
         // Mostramos la ventana.
         view.setVisible(true);
+
+
+        Usuario usuario = model.getUsuarioAutenticado();
+
+
+
+        if (usuario != null) {
+
+            // Creamos el Model de esta nueva pantalla.
+            cambiarClaveModel cambiarModel =
+                    new cambiarClaveModel(usuario);
+
+            // Creamos la View.
+            cambiarClaveView cambiarView =
+                    new cambiarClaveView();
+
+            // Creamos el Controller y conectamos Model + View + Service.
+            cambiarClaveController cambiarController =
+                    new cambiarClaveController(
+                            cambiarModel,
+                            cambiarView,
+                            service
+                    );
+
+            // Mostramos la ventana.
+            cambiarView.setVisible(true);
+        }
+
     }
 }
