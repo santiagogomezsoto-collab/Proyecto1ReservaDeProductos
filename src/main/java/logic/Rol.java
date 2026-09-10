@@ -1,4 +1,4 @@
-package model;
+package logic;
 
 
 //public enum es un tipo de clase especial

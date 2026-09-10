@@ -1,15 +1,15 @@
-package model;
+package logic;
 
 public class Recurso {
 
     private String id;
     private String descripcion;
-    private Categoria categoria; //referencia a categoria
+    private CategoriaRecurso categoria; //referencia a categoria
 
     public Recurso() {
     }
 
-    public Recurso(String id, String descripcion, Categoria categoria) {
+    public Recurso(String id, String descripcion, CategoriaRecurso categoria) {
         this.id = id;
         this.descripcion = descripcion;
         this.categoria = categoria;
@@ -27,7 +27,15 @@ public class Recurso {
         return descripcion;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public CategoriaRecurso getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(CategoriaRecurso categoria) {
         this.categoria = categoria;
     }
 }

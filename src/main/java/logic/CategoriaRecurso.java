@@ -1,16 +1,16 @@
-package model;
+package logic;
 
 //interfaz para los recursos  <-----------------
-public class Categoria {
+public class CategoriaRecurso {
 
     private String id;
     private String descripcion;
 
-    public Categoria(){
+    public CategoriaRecurso(){
     }
 
 
-    public Categoria(String id, String descripcion) {
+    public CategoriaRecurso(String id, String descripcion) {
         this.id=id;
         this.descripcion = descripcion;
     }

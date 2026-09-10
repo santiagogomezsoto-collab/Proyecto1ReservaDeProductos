@@ -1,4 +1,4 @@
-package model;
+package logic;
 
 //interfaz para funcinario y demas <------------------
 public class Usuario {

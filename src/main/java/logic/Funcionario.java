@@ -1,4 +1,4 @@
-package model;
+package logic;
 
 public class Funcionario extends Usuario {
 
@@ -9,7 +9,7 @@ public Funcionario(){
 }
 
 public Funcionario(String id, String clave, Rol rol, String nombre, String telefono){
-        super(id, clave, rol.FUNCIONARIO); //le asigno valor al rol de una
+        super(id, clave, Rol.FUNCIONARIO); //un funcionario siempre tiene rol FUNCIONARIO
     this.nombre = nombre;
     this.telefono = telefono;
 }
